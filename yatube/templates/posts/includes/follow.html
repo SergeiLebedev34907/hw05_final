@@ -1,0 +1,22 @@
+<!-- templates/posts/includes/follow.html -->
+
+{% if user.is_authenticated %}
+{% if request.user != author %}
+    {% if following %}
+        <a 
+          type="submit" class="btn btn-primary"
+          href="{% url 'posts:profile_unfollow' author.username %}" role="button"
+        >
+          Отписаться
+        </a>
+    {% else %}
+        <a 
+           type="submit" class="btn btn-primary"
+           href="{% url 'posts:profile_follow' author.username %}" role="button"
+        >
+          Подписаться
+        </a>
+    {% endif %}
+{% endif %}
+{% endif %}
+ 

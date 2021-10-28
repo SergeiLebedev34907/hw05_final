@@ -1,0 +1,20 @@
+<!-- templates/users/login.html --> 
+
+{% extends "form.html" %}
+
+{% block title %}Войти{% endblock %}
+
+{% block card_header %}
+  Войти на сайт
+{% endblock %}
+
+{% block buttons %}
+  <div class="col-md-6 offset-md-4">
+    <button type="submit" class="btn btn-primary">
+      Войти
+    </button>
+    <a href="{% url 'users:password_reset_form' %}" class="btn btn-link">
+      Забыли пароль?
+    </a>
+  </div>
+{% endblock %}
