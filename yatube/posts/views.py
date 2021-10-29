@@ -146,12 +146,7 @@ def follow_index(request):
     template = 'posts/index.html'
     title = 'Новости'
 
-    follows = request.user.follower.all()
-    authors_list = []
-    for follow in follows:
-        authors_list.append(follow.author)
-
-    post_list = Post.objects.filter(author__in=authors_list)
+    post_list = Post.objects.filter(author__following__user=request.user)
     paginator = Paginator(post_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -176,11 +171,8 @@ def profile_follow(request, username):
 @login_required
 def profile_unfollow(request, username):
     # Дизлайк, отписка
-    try:
-        Follow.objects.get(
-            user=request.user,
-            author=User.objects.get(username=username)
-        ).delete()
-    except Follow.DoesNotExist:
-        pass
+    Follow.objects.filter(
+        user=request.user,
+        author=User.objects.get(username=username)
+    ).delete()
     return redirect('posts:profile', username=username)
