@@ -51,12 +51,11 @@ def profile(request, username):
     paginator = Paginator(post_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    following = False
-    if request.user.is_authenticated and Follow.objects.filter(
-        user=request.user,
-        author=author
-    ).exists():
-        following = True
+    if request.user.is_authenticated:
+        following = Follow.objects.filter(
+            user=request.user,
+            author=author
+        ).exists()
     context = {
         'title': title,
         'author': author,
@@ -163,9 +162,9 @@ def profile_follow(request, username):
     if request.user.username != username:
         Follow.objects.get_or_create(
             user=request.user,
-            author=User.objects.get(username=username)
+            author=get_object_or_404(User, username=username)
         )
-    return redirect('posts:profile', username=username)
+    return redirect('posts:profile', username)
 
 
 @login_required
@@ -173,6 +172,6 @@ def profile_unfollow(request, username):
     # Дизлайк, отписка
     Follow.objects.filter(
         user=request.user,
-        author=User.objects.get(username=username)
+        author=get_object_or_404(User, username=username)
     ).delete()
-    return redirect('posts:profile', username=username)
+    return redirect('posts:profile', username)

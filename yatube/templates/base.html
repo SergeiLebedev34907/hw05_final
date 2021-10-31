@@ -36,9 +36,9 @@
     <header>
       {% include 'includes/header.html' %}
     </header>
-    <main>
+    <main class="row min-vh-100" style="background-image: url({% static 'img/бархат5.jpg' %}); background-size: cover ">
       <!-- класс py-5 создает отступы сверху и снизу блока -->
-      <div class="container py-5">
+      <div class="container py-5 col-lg-8" >
         {% block content %}
           Контент не подвезли :(
         {% endblock %}
@@ -48,8 +48,10 @@
     <!-- border-top: создаёт тонкую линию сверху блока -->
     <!-- text-center: выравнивает текстовые блоки внутри блока по центру -->
     <!-- py-3: контент внутри размещается с отсупом сверху и снизу -->
-    <footer class="border-top text-center py-3">
-      {% include 'includes/footer.html' %}
+    <footer
+      class="sticky-bottom text-center py-3" 
+      style="background: fixed url({% static 'img/main.jpg' %}); background-size: cover; background-position: bottom">
+        {% include 'includes/footer.html' %}
     </footer>
   </body>
 </html>

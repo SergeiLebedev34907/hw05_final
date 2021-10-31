@@ -10,14 +10,15 @@
 {% endblock %}
 
 {% block buttons %}
+{% load static %}
   <div class="d-flex justify-content-end">
     {% if is_edit %}
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary text-warning btn-outline-danger" style=" background: url({% static 'img/main.jpg' %}); background-size: cover">
         Добавить
       </button>
     {% else %}
-      <button type="submit" class="btn btn-primary">
-        Сохранить
+      <button type="submit" class="btn btn-primary text-warning btn-outline-danger" style=" background: url({% static 'img/main.jpg' %}); background-size: cover">
+        <strong>Сохранить</strong>
       </button>
     {% endif %}
   </div>

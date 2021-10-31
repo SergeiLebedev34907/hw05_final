@@ -1,9 +1,13 @@
-<!-- templates/includes/header.html -->
-<!-- Использованы классы бустрапа для создания типовой навигации -->
-<!-- с логотипом. В дальнейшем тут будет создано полноценное меню -->    
+<!-- templates/includes/header.html --> 
 {% load static %}
+{% load thumbnail %}
 {% with request.resolver_match.view_name as view_name %}
-<nav class="navbar navbar-light" style="background-color: lightskyblue">
+<nav 
+  class="navbar sticky-top navbar-light" 
+  style="background: url({% static 'img/header.jpg' %}); background-size: cover"
+  data-mdb-sticky-boundary="true"
+  data-mdb-sticky-offset="58"
+  data-mdb-sticky-delay="58"> 
   <div class="container">
     <!-- ссылка должна вести на главную страницу -->
     <a class="navbar-brand" href="{% url 'posts:index' %}">
@@ -13,70 +17,78 @@
         height="30"
         class="d-inline-block align-top"
         alt="">
-      <!-- тег span используется для добавления нужных -->
-      <!-- стилей отдельным участкам текста -->
-      <span style="color:red">Ya</span>tube
+      Yatube
     </a>
     {% comment %}
     Меню - список пунктов со стандартными классами Bootsrap.
     Класс nav-pills нужен для выделения активных пунктов 
     {% endcomment %}
     <ul class="nav nav-pills">
-      <li class="nav-item"> 
-        <a class="nav-link
-          {% if view_name  == 'about:author' %}active{% endif %}"
+      <li class="nav-item">
+        <a class="nav-link text-dark" 
+          {% if view_name  == 'about:author' %}
+            style="background: linear-gradient(to top, #fff, #ffc107)"
+          {% endif %}
           href="{% url 'about:author' %}"
-        >Об авторе</a>
+        ><strong>Об авторе</strong></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link
-          {% if view_name  == 'about:tech' %}active{% endif %}"
+        <a class="nav-link text-dark"
+          {% if view_name  == 'about:tech' %}
+            style="background: linear-gradient(to top, #fff, #ffc107)"
+          {% endif %}
           href="{% url 'about:tech' %}"
-        >Технологии</a>
+        ><strong>Технологии</strong></a>
       </li>
 
       {% if  request.user.is_authenticated %}
         <li class="nav-item"> 
-          <a class="nav-link
-            {% if view_name  == 'posts:post_create' %}active{% endif %}"
+          <a class="nav-link text-dark"
+            {% if view_name  == 'posts:post_create' %}
+            style="background: linear-gradient(to top, #fff, #ffc107)"
+          {% endif %}
             href="{% url 'posts:post_create' %}"
-          >Новая запись</a>
+          ><strong>Новая запись</strong></a>
         </li>
         <li class="nav-item"> 
-         <a class="nav-link
+         <a class="nav-link text-dark"
           {% if view_name  == 'users:password_change_form' %}
-            active
-          {% endif %}"
+            style="background: linear-gradient(to top, #fff, #ffc107)"
+          {% endif %}
           href="{% url 'users:password_change_form' %}"
-         >Изменить пароль</a>
+         ><strong>Изменить пароль</strong></a>
         </li>
         <li class="nav-item"> 
-          <a class="nav-link
-          {% if view_name  == 'users:logout' %}active{% endif %}"
+          <a class="nav-link text-dark"
+          {% if view_name  == 'users:logout' %}
+            style="background: linear-gradient(to top, #fff, #ffc107)"
+          {% endif %}
           href="{% url 'users:logout' %}"
-          >Выйти</a>
+          ><strong>Выйти</strong></a>
         </li>
         <li class="nav-item">
-          Пользователь: <a
-            class="nav-link
-              {% if view_name  == 'posts:profile' %}
-                active
-              {% endif %}"
+          <a 
+            class="nav-link text-warning"
+            style = "background: url({% static 'img/main.jpg' %}); background-size: cover"
           href="{% url 'posts:profile' request.user.username %}"
-          >{{ user.username }}</a>
+          ><strong>{{ user.username }}</strong></a>
         <li>
       {% else %}
         <li class="nav-item"> 
-          <a class="nav-link
-            {% if view_name  == 'users:login' %}active{% endif %}"
+          <a class="nav-link text-dark"
+            {% if view_name  == 'users:login' %}
+            style="background: linear-gradient(to top, #fff, #ffc107)"
+          {% endif %}
             href="{% url 'users:login' %}"
-          >Войти</a>
+          ><strong>Войти</strong></a>
         </li>
         <li class="nav-item"> 
-          <a class="nav-link
-            {% if view_name  == 'users:signup' %}active{% endif %}"
+          <a class="nav-link text-dark"
+            {% if view_name  == 'users:signup' %}
+            style="background: linear-gradient(to top, #fff, #ffc107)"
+          {% endif %}
             href="{% url 'users:signup' %}"
-          >Регистрация</a>
+          ><strong>Регистрация</strong></a>
         </li>
       {% endif %}
     </ul>

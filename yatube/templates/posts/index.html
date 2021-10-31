@@ -6,8 +6,9 @@
 {% endblock %}
 
 {% block content %}
+  {% load static %}
   {% load thumbnail %}
-  <h1>{{title}}</h1>
+  <h1 class="text-warning">{{title}}</h1>
   {% include 'posts/includes/switcher.html' %}
   {% for post in page_obj %}
     <article>
@@ -15,27 +16,34 @@
         <img class="card-img my-2" src="{{ im.url }}">
       {% endthumbnail %}
       <ul>
-        <li>
+        <li class="text-warning">
           Автор: 
-          <a href="{% url 'posts:profile' post.author.username %}"
+          <a href="{% url 'posts:profile' post.author.username %}" class="text-warning"
           >{{ post.author.get_full_name }}</a>
         </li>
-        <li>
+        <li class="text-warning">
           Дата публикации: {{ post.pub_date|date:"d E Y" }}
-        </li>
+        </li class="text-warning">
         {% if post.group %}
-          <li>
+          <li class="text-warning">
             Группа: 
-            <a href="{% url 'posts:group_list' post.group.slug %}"
+            <a href="{% url 'posts:group_list' post.group.slug %}" class="text-warning"
             >{{ post.group }}</a>
           </li>
         {% endif %}
       </ul>
-      <p>{{ post.text }}</p>
-      <a href="{% url 'posts:post_detail' post.pk %}"
+      <p  class="text-warning">{{ post.text }}</p>
+      <a href="{% url 'posts:post_detail' post.pk %}" class="text-warning"
       >подробная информация </a>
     </article>
-    {% if not forloop.last %}<hr>{% endif %}
+    {% if not forloop.last %}
+      <p>
+        <img
+          src="{% static 'img/arrows.png' %}"
+          class="w-100"
+          alt="">
+      </p>
+    {% endif %}
   {% endfor %}
   {% include 'posts/includes/paginator.html' %}
 {% endblock %}

@@ -1,37 +1,38 @@
 <!-- templates/posts/includes/paginator.html -->
 
+{% load static %}
 <!-- Отрисовываем навигацию паджинатора только если
 все посты не помещаются на первую страницу --> 
 {% if page_obj.has_other_pages %}
-<nav aria-label="Page navigation" class="my-5">
-  <ul class="pagination">
+<nav aria-label="Page navigation" class="my-5 ">
+  <ul class="pagination justify-content-center">
     {% if page_obj.has_previous %}
-      <li class="page-item"><a class="page-link" href="?page=1">Первая</a></li>
+      <li class="page-item"><a class="page-link text-dark" style="background: url({% static 'img/header.jpg' %}); background-size: cover" href="?page=1">Первая</a></li>
       <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-          Предыдущая
+        <a class="page-link text-dark" style="background: url({% static 'img/header.jpg' %}); background-size: cover" href="?page={{ page_obj.previous_page_number }}">
+          <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
     {% endif %}
     {% for i in page_obj.paginator.page_range %}
         {% if page_obj.number == i %}
-          <li class="page-item active">
-            <span class="page-link">{{ i }}</span>
+          <li class="page-item">
+            <span class="page-link text-dark" style="background: linear-gradient(to top, #fff, #ffc107)">{{ i }}</span>
           </li>
         {% else %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            <a class="page-link text-dark" style="background: url({% static 'img/header.jpg' %}); background-size: cover" href="?page={{ i }}">{{ i }}</a>
           </li>
         {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-          Следующая
+        <a class="page-link text-dark" style="background: url({% static 'img/header.jpg' %}); background-size: cover" href="?page={{ page_obj.next_page_number }}">
+          <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
       <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+        <a class="page-link text-dark" style="background: url({% static 'img/header.jpg' %}); background-size: cover" href="?page={{ page_obj.next_page_number }}">
           Последняя
         </a>
       </li>

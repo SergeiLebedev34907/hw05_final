@@ -9,8 +9,9 @@
 {% endblock %}
 
 {% block buttons %}
-  <div class="col-md-6 offset-md-4">
-    <button type="submit" class="btn btn-primary">
+  {% load static %}
+  <div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary text-warning btn-outline-danger" style=" background: url({% static 'img/main.jpg' %}); background-size: cover">
       Зарегистрироваться
     </button>
   </div>
