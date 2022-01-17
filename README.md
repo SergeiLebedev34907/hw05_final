@@ -47,6 +47,7 @@
 Проверено, что запрос к несуществующей странице вернёт ошибку 404.
 
 | URL | Права доступа | Используемый шаблона |
+| ------ | ------ | ------ |
 | / | Всем | posts/index.html |
 | /group/<slug>/ | Всем | posts/group_list.html |
 | profile/<username>/ | Всем | posts/profile.html |
@@ -57,6 +58,7 @@
 
 Написаны тесты, проверяющие, что во view-функциях используются правильные html-шаблоны.
 | Шаблон | Reverse |
+| ------ | ------ |
 | posts/index.html | posts:index |
 | posts/group_list.html | posts:group_list |
 | posts/profile.html | posts:profile |
@@ -66,6 +68,7 @@
 
 Проверено, соответствует ли ожиданиям словарь context, передаваемый в шаблон при вызове. Протестирован пажинатор.
 | Reverse | Ожидаемый контекст |
+| ------ | ------ |
 | posts/index.html | список постов |
 | posts/group_list.html | список постов отфильтрованный по группе |
 | posts/profile.html | список постов отфильтрованный по пользователю |
