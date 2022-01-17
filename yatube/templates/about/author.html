@@ -1,11 +1,15 @@
-<!-- templates/about/author.html --> 
-<!DOCTYPE html> <!-- Используется html 5 версии -->
+<!-- templates/about/author.html -->
+
 {% extends "base.html" %}
+
 {% block title %}Об авторе проекта{% endblock %}
+
+{% block heading %}
+  <h1 class="text-warning text-center">Привет, я автор</h1>
+{% endblock %}
+
 {% block content %}
-<h1 class="text-warning">Привет, я автор</h1>
-<p class="text-warning">
-  Тут я размещу информацию о себе используя свои умения верстать.
-  Картинки, блоки, элементы бустрап. А может быть, просто напишу несколько абзацев текста. 
-</p>
+  <p class="text-warning px-1">
+    Моя почта ds34907@mail.ru 
+  </p>
 {% endblock %}

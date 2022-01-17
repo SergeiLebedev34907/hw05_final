@@ -4,12 +4,14 @@
 {% with request.resolver_match.view_name as view_name %}
 <nav 
   class="navbar sticky-top navbar-light" 
-  style="background: url({% static 'img/header.jpg' %}); background-size: cover"
+  style="
+    background: fixed url({% static 'img/header.jpg' %});
+    background-size: cover
+  "
   data-mdb-sticky-boundary="true"
   data-mdb-sticky-offset="58"
   data-mdb-sticky-delay="58"> 
   <div class="container">
-    <!-- ссылка должна вести на главную страницу -->
     <a class="navbar-brand" href="{% url 'posts:index' %}">
       <img
         src="{% static 'img/logo.png' %}"
@@ -19,10 +21,6 @@
         alt="">
       Yatube
     </a>
-    {% comment %}
-    Меню - список пунктов со стандартными классами Bootsrap.
-    Класс nav-pills нужен для выделения активных пунктов 
-    {% endcomment %}
     <ul class="nav nav-pills">
       <li class="nav-item">
         <a class="nav-link text-dark" 

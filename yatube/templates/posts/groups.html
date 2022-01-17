@@ -1,4 +1,4 @@
-<!-- templates/posts/index.html -->
+<!-- templates/posts/groups.html -->
 
 {% extends 'base.html' %}
 
@@ -12,5 +12,12 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'posts/includes/posts_list.html' %}
+  {% for group in page_obj %}
+    <h2>
+      <a
+        href="{% url 'posts:group_list' group.slug %}"
+        class="text-warning"
+      >{{ group }}</a>
+    </h2>
+  {% endfor %}
 {% endblock %}

@@ -1,9 +1,11 @@
 # posts/tests/test_urls.py
-from django.contrib.auth import get_user_model
-from django.test import TestCase, Client
-from django.urls import reverse
 from http import HTTPStatus
-from ..models import Post, Group
+
+from django.contrib.auth import get_user_model
+from django.test import Client, TestCase
+from django.urls import reverse
+
+from ..models import Group, Post
 
 User = get_user_model()
 
@@ -13,26 +15,23 @@ class PostsURLTests(TestCase):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.auth = User.objects.create_user(username='auth')
-        cls.user = User.objects.create_user(username='user')
+        cls.auth = User.objects.create_user(username="auth")
+        cls.user = User.objects.create_user(username="user")
         cls.group = Group.objects.create(
-            title='Тестовая группа',
-            slug='test-slug',
-            description='Тестовое описание',
+            title="Тестовая группа",
+            slug="test-slug",
+            description="Тестовое описание",
         )
         cls.post = Post.objects.create(
-            id=1,
-            author=cls.auth,
-            text='Тестовый текст поста',
-            group=cls.group
+            id=1, author=cls.auth, text="Тестовый текст поста", group=cls.group
         )
         cls.addr_list = [
-            '/',
-            '/group/test-slug/',
-            '/profile/auth/',
-            f'/posts/{PostsURLTests.post.id}/',
-            f'/posts/{PostsURLTests.post.id}/edit/',
-            '/create/',
+            "/",
+            "/group/test-slug/",
+            "/profile/auth/",
+            f"/posts/{PostsURLTests.post.id}/",
+            f"/posts/{PostsURLTests.post.id}/edit/",
+            "/create/",
         ]
 
     def setUp(self):
@@ -47,7 +46,7 @@ class PostsURLTests(TestCase):
 
     def test_unexisting_page(self):
         """Получен ожидаемый status code несуществующей страницы."""
-        response = self.client.get('/unexisting-page/')
+        response = self.client.get("/unexisting-page/")
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND.value)
 
     def test_address_status(self):
@@ -62,10 +61,10 @@ class PostsURLTests(TestCase):
         """Страница по адресу '/create/' перенаправит анонимного
         пользователя на страницу логина.
         """
-        response = self.client.get(reverse('posts:post_create'), follow=True)
+        response = self.client.get(reverse("posts:post_create"), follow=True)
         self.assertRedirects(
             response,
-            reverse('users:login') + '?next=' + reverse('posts:post_create')
+            reverse("users:login") + "?next=" + reverse("posts:post_create"),
         )
 
     def test_post_edit_url_redirect_anonymous_on_admin_login(self):
@@ -74,17 +73,19 @@ class PostsURLTests(TestCase):
         """
         response = self.client.get(
             reverse(
-                'posts:post_edit',
-                kwargs={'post_id': f'{PostsURLTests.post.id}'}
+                "posts:post_edit",
+                kwargs={"post_id": f"{PostsURLTests.post.id}"},
             ),
-            follow=True
+            follow=True,
         )
         self.assertRedirects(
             response,
-            reverse('users:login') + '?next=' + reverse(
-                'posts:post_edit',
-                kwargs={'post_id': f'{PostsURLTests.post.id}'}
-            )
+            reverse("users:login")
+            + "?next="
+            + reverse(
+                "posts:post_edit",
+                kwargs={"post_id": f"{PostsURLTests.post.id}"},
+            ),
         )
 
     def test_add_comment_url_redirect_anonymous_on_admin_login(self):
@@ -93,35 +94,36 @@ class PostsURLTests(TestCase):
         """
         response = self.client.get(
             reverse(
-                'posts:add_comment',
-                kwargs={'post_id': f'{PostsURLTests.post.id}'}
+                "posts:add_comment",
+                kwargs={"post_id": f"{PostsURLTests.post.id}"},
             ),
-            follow=True
+            follow=True,
         )
         self.assertRedirects(
             response,
-            reverse('users:login') + '?next=' + reverse(
-                'posts:add_comment',
-                kwargs={'post_id': f'{PostsURLTests.post.id}'}
-            )
+            reverse("users:login")
+            + "?next="
+            + reverse(
+                "posts:add_comment",
+                kwargs={"post_id": f"{PostsURLTests.post.id}"},
+            ),
         )
 
-    # Проверяем редирект для авторизованного пользователя,
-    # не являющегося автором поста
     def test_post_edit_url_redirect_authorized_client_on_post_detail(self):
         """Страница по адресу '/posts/<post_id>/edit/' перенаправит авторизованного
         пользователя на страницу подробного описания поста.
         """
         response = self.authorized_client.get(
             reverse(
-                'posts:post_edit',
-                kwargs={'post_id': f'{PostsURLTests.post.id}'}
+                "posts:post_edit",
+                kwargs={"post_id": f"{PostsURLTests.post.id}"},
             ),
-            follow=True)
+            follow=True,
+        )
         self.assertRedirects(
             response,
             reverse(
-                'posts:post_detail',
-                kwargs={'post_id': f'{PostsURLTests.post.id}'}
-            )
+                "posts:post_detail",
+                kwargs={"post_id": f"{PostsURLTests.post.id}"},
+            ),
         )

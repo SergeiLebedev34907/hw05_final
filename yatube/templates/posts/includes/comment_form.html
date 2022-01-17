@@ -2,35 +2,43 @@
 {% load static %}
 {% load user_filters %}
 
-{% if user.is_authenticated %}
-  <div class="card my-4 border-warning" style="background-color: transparent">
-    <h5 class="card-header" style=" background: url({% static 'img/header.jpg' %}); background-size: cover"><strong>Добавить комментарий:</strong></h5>
-    <div class="card-body" style="background-color: rgba(21,25,29,.55)">
-      <form method="post" action="{% url 'posts:add_comment' post.id %}">
-        {% csrf_token %}      
-        <div class="form-group mb-2">
-          {{ form.text|addclass:"form-control" }}
-        </div>
-        <button type="submit" class="btn btn-primary text-warning btn-outline-danger" style=" background: url({% static 'img/main.jpg' %}); background-size: cover"><strong>Отправить</strong></button>
-      </form>
-    </div>
-  </div>
-{% endif %}
-
+<div class="container col-lg-8 my-5">
 {% for comment in comments %}
   <div class="media mb-4">
     <div class="media-body">
       <h5 class="mt-0">
-        <a class="text-warning" href="{% url 'posts:profile' comment.author.username %}">
-          <strong>{{ comment.author.username }}</strong>
+        <a
+          class="text-warning"
+          href="{% url 'posts:profile' comment.author.username %}"
+        ><strong>{{ comment.author.username }}</strong>
         </a>
         <small class="form-text text-warning">
           {{ comment.created|date:"d E Y e: H:i" }}
         </small>
       </h5>
-        <p class="text-warning">
-          {{ comment.text }}
-        </p>
-      </div>
+      <p class="text-warning">
+        {{ comment.text }}
+      </p>
     </div>
-{% endfor %} 
+  </div>
+{% endfor %}
+
+{% if user.is_authenticated %}
+  <div style="background-color: rgba(21,25,29,.55)">
+      <form method="post" action="{% url 'posts:add_comment' post.id %}">
+        {% csrf_token %}      
+        <div class="form-group mb-2">
+          {{ form.text|addclass:"form-control" }}
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary text-warning btn-outline-danger"
+          style="
+            background: url({% static 'img/main.jpg' %});
+            background-size: cover">
+              <strong>Отправить</strong>
+        </button>
+      </form>
+  </div>
+{% endif %}
+</div>

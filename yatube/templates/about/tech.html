@@ -1,33 +1,36 @@
-<!-- templates/about/tech.html --> 
-<!DOCTYPE html> <!-- Используется html 5 версии -->
+<!-- templates/about/tech.html -->
+
 {% extends "base.html" %}
+
 {% block title %}Технологии{% endblock %}
-{% block content %}
-{% comment %} Колонки с отступом сверху и снизу {% endcomment %}
-<div class="row">
+
+{% block heading %}
   <h1 class="text-warning">Вот что я умею</h1>
-  {% comment %}
-    Боковой блок со списком технологий 
-    Займет всю ширину блока на мобильном
-    и 25% при размерах экрана ≥768px
-  {% endcomment %}
-  <aside class="col-12 col-md-3">
-    <ul class="list-group list-group-flush">
-      <li class="text-warning list-group-item" style="background-color: transparent">
-        Python
-      </li>
-      <li class="text-warning list-group-item" style="background-color: transparent">
-        Django
-      </li>
-    </ul>
-  </aside>
-  {% comment %}
-    Статья  
-    Займет всю ширину блока на мобильном
-    и 75% при размерах экрана ≥768px
-  {% endcomment %}
-  <article class="col-12 col-md-9">
-    <p class="text-warning">Текст страницы "Технологии"</p>
-  </article>
-</div>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <aside class="col-12 col-md-3">
+      <ul class="list-group list-group-flush">
+        <li
+          class="text-warning list-group-item"
+          style="background-color: transparent"
+        >
+          Python
+        </li>
+        <li
+          class="text-warning list-group-item"
+          style="background-color: transparent"
+        >
+          Django
+        </li>
+      </ul>
+    </aside>
+
+    <article class="col-12 col-md-9">
+      <p class="text-warning">
+        Текст страницы "Технологии"
+      </p>
+    </article>
+  </div>
 {% endblock %}

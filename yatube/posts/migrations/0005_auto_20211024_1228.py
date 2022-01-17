@@ -6,17 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0004_comment'),
+        ("posts", "0004_comment"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='comment',
-            options={'ordering': ['-created'], 'verbose_name': 'Комментарий', 'verbose_name_plural': 'Комментарии'},
+            name="comment",
+            options={
+                "ordering": ["-created"],
+                "verbose_name": "Комментарий",
+                "verbose_name_plural": "Комментарии",
+            },
         ),
         migrations.AlterField(
-            model_name='comment',
-            name='created',
-            field=models.DateTimeField(auto_now_add=True, verbose_name='Дата комментария'),
+            model_name="comment",
+            name="created",
+            field=models.DateTimeField(
+                auto_now_add=True, verbose_name="Дата комментария"
+            ),
         ),
     ]
