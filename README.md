@@ -49,10 +49,10 @@
 | URL | Права доступа | Используемый шаблона |
 | ------ | ------ | ------ |
 | / | Всем | posts/index.html |
-| /group/<slug>/ | Всем | posts/group_list.html |
-| profile/<username>/ | Всем | posts/profile.html |
-| posts/<post_id>/ | Всем | posts/post_detail.html |
-| posts/<post_id>/edit/ | Автору | posts/create_post.html |
+| group/\<slug\>/ | Всем | posts/group_list.html |
+| profile/\<username\>/ | Всем | posts/profile.html |
+| posts/\<post_id\>/ | Всем | posts/post_detail.html |
+| posts/\<post_id\>/edit/ | Автору | posts/create_post.html |
 | create/ | Авторизованному | posts/create_post.html |
 | unexisting_page/ | Всем | |
 
