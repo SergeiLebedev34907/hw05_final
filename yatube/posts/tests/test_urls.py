@@ -35,13 +35,9 @@ class PostsURLTests(TestCase):
         ]
 
     def setUp(self):
-        # Создаем второй клиент
         self.authorized_client = Client()
-        # Создаем клиент автора поста
         self.authorized_client_auth = Client()
-        # Авторизуем пользователя
         self.authorized_client.force_login(PostsURLTests.user)
-        # Авторизуем автора поста
         self.authorized_client_auth.force_login(PostsURLTests.auth)
 
     def test_unexisting_page(self):
@@ -56,7 +52,6 @@ class PostsURLTests(TestCase):
                 response = self.authorized_client_auth.get(addr)
                 self.assertEqual(response.status_code, HTTPStatus.OK.value)
 
-    # Проверяем редиректы для неавторизованного пользователя
     def test_post_create_url_redirect_anonymous_on_admin_login(self):
         """Страница по адресу '/create/' перенаправит анонимного
         пользователя на страницу логина.
